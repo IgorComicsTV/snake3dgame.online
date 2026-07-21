@@ -1,8 +1,11 @@
 import './styles.css';
+import { inject } from '@vercel/analytics';
 import { Game } from './game/Game';
 import { LEVELS, type GameMode } from './game/levels';
 import type { SnakeState } from './game/simulation';
 import { getTranslation, localeLabels, mobileTranslations, type Locale } from './i18n';
+
+inject();
 
 type Quality = 'low' | 'medium' | 'high';
 type ControlsSize = 'medium' | 'large' | 'xlarge';
