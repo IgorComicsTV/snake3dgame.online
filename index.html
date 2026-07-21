@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#111511" />
+    <title>Snake 3D</title>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="game-canvas" aria-label="Snake 3D"></canvas>
+
+      <div id="hud" class="hud hidden">
+        <div class="scoreboard">
+          <div><span id="label-points">PONTOS</span><strong id="score">0</strong></div>
+          <div><span id="label-best">RECORDE</span><strong id="best">0</strong></div>
+          <div><span id="label-combo">COMBO</span><strong id="combo">×1</strong></div>
+        </div>
+        <div id="stage-label" class="stage-label">ENDLESS</div>
+        <div id="goal" class="goal hidden">0 / 5 FRUTAS</div>
+        <button id="pause-button" class="icon-button" aria-label="Pausar">Ⅱ</button>
+        <div id="speed" class="speed">VELOCIDADE 1</div>
+      </div>
+
+      <div id="event-message" class="event-message hidden"></div>
+
+      <aside id="game-ads" class="game-ads hidden" aria-label="Advertising">
+        <div id="adsterra-top" class="ad-slot ad-top"><span>AD</span><!-- Adsterra 728x90: inserir o script fornecido pelo painel aqui --></div>
+        <div id="adsterra-left" class="ad-slot ad-left"><span>AD</span><!-- Adsterra 160x600: inserir o script fornecido pelo painel aqui --></div>
+        <div id="adsterra-right" class="ad-slot ad-right"><span>AD</span><!-- Adsterra 160x600: inserir o script fornecido pelo painel aqui --></div>
+      </aside>
+
+      <section id="start-screen" class="screen menu-screen">
+        <div class="menu-tools">
+          <button id="language-button" aria-label="Idioma">🌐 PT</button>
+          <button id="settings-button" aria-label="Configurações">⚙</button>
+        </div>
+        <div class="snake-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <h1>SNAKE 3D</h1>
+        <p id="tagline">Coma, cresça e use os portais. Escolha uma corrida infinita ou avance por mapas com novos desafios.</p>
+        <div id="mode-buttons" class="mode-buttons">
+          <button id="endless-button" class="primary">ENDLESS</button>
+          <button id="levels-button" class="secondary mode-secondary">FASES</button>
+        </div>
+        <div id="level-panel" class="level-panel hidden">
+          <p id="choose-map">ESCOLHA O MAPA</p>
+          <div id="level-grid"></div>
+          <button id="back-button" class="text-button">Voltar</button>
+        </div>
+        <div id="controls" class="controls"><b>WASD</b> ou <b>SETAS</b> · <b>ESC</b> pausa</div>
+        <div id="adsterra-menu-bottom" class="ad-slot ad-menu-bottom"><span>AD</span><!-- Adsterra 728x90: inserir o script fornecido pelo painel aqui --></div>
+      </section>
+
+      <section id="pause-screen" class="screen compact hidden">
+        <h2 id="paused-title">PAUSADO</h2>
+        <button id="resume-button" class="primary">CONTINUAR</button>
+        <button id="restart-pause-button" class="secondary">REINICIAR</button>
+        <button id="settings-pause-button" class="text-button">CONFIGURAÇÕES</button>
+        <button id="menu-pause-button" class="text-button">Menu principal</button>
+      </section>
+
+      <section id="end-screen" class="screen compact hidden">
+        <h2 id="end-title">FIM DE JOGO</h2>
+        <p id="end-stats"></p>
+        <button id="next-button" class="primary">JOGAR NOVAMENTE</button>
+        <button id="share-button" class="share-button hidden">𝕏&nbsp; COMPARTILHAR NO X</button>
+        <button id="menu-button" class="text-button">Menu principal</button>
+      </section>
+
+      <section id="settings-screen" class="screen compact settings-screen hidden" role="dialog" aria-modal="true">
+        <h2 id="settings-title">CONFIGURAÇÕES</h2>
+        <div class="settings-form">
+          <label for="language-select" id="language-label">Idioma</label>
+          <select id="language-select"></select>
+          <label for="quality-select" id="quality-label">Qualidade gráfica</label>
+          <select id="quality-select">
+            <option value="low">Baixa</option>
+            <option value="medium">Média</option>
+            <option value="high">Alta</option>
+          </select>
+          <label for="sound-select" id="sound-label">Sons</label>
+          <select id="sound-select">
+            <option value="on">Ligados</option>
+            <option value="off">Desligados</option>
+          </select>
+        </div>
+        <button id="settings-close-button" class="primary">SALVAR E FECHAR</button>
+      </section>
+
+      <div id="mobile-controls" class="mobile-controls hidden" aria-label="Directional controls">
+        <button data-key="ArrowUp" aria-label="Up">▲</button>
+        <button data-key="ArrowLeft" aria-label="Left">◀</button>
+        <button data-key="ArrowDown" aria-label="Down">▼</button>
+        <button data-key="ArrowRight" aria-label="Right">▶</button>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
