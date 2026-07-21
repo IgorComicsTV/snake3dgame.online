@@ -134,7 +134,7 @@ function applyTranslations(): void {
   get('levels-button').textContent = t.levels;
   get('choose-map').textContent = t.chooseMap;
   get('back-button').textContent = t.back;
-  get('controls').textContent = t.controls;
+  get('controls').textContent = isTouch ? mobile.controlsHint : t.controls;
   get('paused-title').textContent = t.paused;
   get('resume-button').textContent = t.continue;
   get('restart-pause-button').textContent = t.restart;
