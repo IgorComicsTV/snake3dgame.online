@@ -7,8 +7,16 @@ const directions: Record<string, Direction> = {
   ArrowRight: { x: 1, z: 0 }, KeyD: { x: 1, z: 0 },
 };
 
+export function directionFromSwipe(deltaX: number, deltaY: number, threshold: number): Direction | undefined {
+  if (Math.hypot(deltaX, deltaY) < threshold) return undefined;
+  return Math.abs(deltaX) > Math.abs(deltaY)
+    ? { x: Math.sign(deltaX), z: 0 }
+    : { x: 0, z: Math.sign(deltaY) };
+}
+
 export class Input {
   private queue: Direction[] = [];
+  private swipeStart?: { x: number; y: number; pointerId: number };
 
   constructor() {
     window.addEventListener('keydown', (event) => {
@@ -24,6 +32,25 @@ export class Input {
         if (direction) this.push(direction);
       });
     });
+    const canvas = document.querySelector<HTMLCanvasElement>('#game-canvas');
+    canvas?.addEventListener('pointerdown', (event) => {
+      if (event.pointerType !== 'touch') return;
+      this.swipeStart = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
+      canvas.setPointerCapture(event.pointerId);
+    });
+    canvas?.addEventListener('pointerup', (event) => {
+      const start = this.swipeStart;
+      if (!start || start.pointerId !== event.pointerId) return;
+      this.swipeStart = undefined;
+      const deltaX = event.clientX - start.x;
+      const deltaY = event.clientY - start.y;
+      const threshold = Math.max(24, Math.min(innerWidth, innerHeight) * 0.065);
+      const direction = directionFromSwipe(deltaX, deltaY, threshold);
+      if (!direction) return;
+      this.push(direction);
+      navigator.vibrate?.(10);
+    });
+    canvas?.addEventListener('pointercancel', () => { this.swipeStart = undefined; });
   }
 
   drain(): Direction[] {

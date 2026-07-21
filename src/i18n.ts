@@ -15,6 +15,19 @@ export const localeLabels: Record<Locale, string> = {
   it: 'Italiano', ja: '日本語', ko: '한국어', 'zh-CN': '中文', ru: 'Русский',
 };
 
+export const mobileTranslations: Record<Locale, { controlsSize: string; medium: string; large: string; xlarge: string; swipeHint: string }> = {
+  'pt-BR': { controlsSize: 'Tamanho dos controles', medium: 'Médio', large: 'Grande', xlarge: 'Muito grande', swipeHint: 'Você também pode arrastar o dedo em qualquer parte livre da tela.' },
+  en: { controlsSize: 'Control size', medium: 'Medium', large: 'Large', xlarge: 'Extra large', swipeHint: 'You can also swipe anywhere on the open game screen.' },
+  es: { controlsSize: 'Tamaño de controles', medium: 'Mediano', large: 'Grande', xlarge: 'Muy grande', swipeHint: 'También puedes deslizar el dedo en cualquier parte libre de la pantalla.' },
+  fr: { controlsSize: 'Taille des commandes', medium: 'Moyenne', large: 'Grande', xlarge: 'Très grande', swipeHint: "Vous pouvez aussi glisser le doigt sur toute zone libre de l'écran." },
+  de: { controlsSize: 'Steuerungsgröße', medium: 'Mittel', large: 'Groß', xlarge: 'Sehr groß', swipeHint: 'Du kannst auch über einen freien Bereich des Spielfelds wischen.' },
+  it: { controlsSize: 'Dimensione controlli', medium: 'Media', large: 'Grande', xlarge: 'Molto grande', swipeHint: 'Puoi anche scorrere il dito in qualsiasi area libera dello schermo.' },
+  ja: { controlsSize: '操作ボタンのサイズ', medium: '中', large: '大', xlarge: '特大', swipeHint: 'ゲーム画面の空いている場所をスワイプして操作できます。' },
+  ko: { controlsSize: '컨트롤 크기', medium: '중간', large: '크게', xlarge: '매우 크게', swipeHint: '게임 화면의 빈 곳을 스와이프해서도 조작할 수 있습니다.' },
+  'zh-CN': { controlsSize: '控制按钮大小', medium: '中', large: '大', xlarge: '超大', swipeHint: '也可以在游戏画面的空白区域滑动来控制方向。' },
+  ru: { controlsSize: 'Размер управления', medium: 'Средний', large: 'Большой', xlarge: 'Очень большой', swipeHint: 'Также можно провести пальцем по свободной области игрового экрана.' },
+};
+
 export const translations: Record<Locale, Translation> = {
   'pt-BR': {
     tagline: 'Coma, cresça e use os portais. Escolha uma corrida infinita ou avance por mapas com novos desafios.',
