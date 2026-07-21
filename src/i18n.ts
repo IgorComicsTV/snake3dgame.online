@@ -41,7 +41,7 @@ export const translations: Record<Locale, Translation> = {
     levelNames: ['Jardim', 'Cânion', 'Nexo', 'Gelo', 'Ruínas', 'Vulcão', 'Quântico', 'Labirinto', 'Vazio', 'Coroa'],
   },
   en: {
-    tagline: 'Eat, grow and use portals. Choose an endless run or progress through maps with new challenges.',
+    tagline: 'Play Snake 3D free online. Eat fruit, grow, use portals, and beat endless runs or 10 challenging levels.',
     endless: 'ENDLESS', levels: 'LEVELS', chooseMap: 'CHOOSE A MAP', back: 'Back', controls: 'WASD or ARROWS · ESC pauses',
     paused: 'PAUSED', continue: 'CONTINUE', restart: 'RESTART', mainMenu: 'Main menu', gameOver: 'GAME OVER',
     stageComplete: 'LEVEL COMPLETE', allComplete: 'ALL LEVELS COMPLETE', playAgain: 'PLAY AGAIN', nextStage: 'NEXT LEVEL',

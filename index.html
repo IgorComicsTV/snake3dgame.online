@@ -1,25 +1,91 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Snake 3D – Free Online Snake Game to Play at School</title>
+    <meta name="description" content="Play Snake 3D free online in your browser. Enjoy endless mode, 10 challenging levels, portals, combos and mobile controls—no download required." />
+    <meta name="keywords" content="snake game, snake game 3D, free online games, games to play at school, browser games, unblocked snake game, jogo da cobrinha, jogos grátis" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="Snake 3D" />
+    <meta name="application-name" content="Snake 3D" />
     <meta name="theme-color" content="#111511" />
-    <title>Snake 3D</title>
+    <link rel="canonical" href="https://snake3dgame.online/" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Barlow:wght@400;600&amp;display=swap" rel="stylesheet" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://snake3dgame.online/" />
+    <meta property="og:title" content="Snake 3D – Free Online Snake Game" />
+    <meta property="og:description" content="Play a fast 3D snake game online for free. Master portals, combos, endless mode and 10 unique levels." />
+    <meta property="og:image" content="https://snake3dgame.online/og-snake-3d.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Snake 3D green snake and apple logo" />
+    <meta property="og:site_name" content="Snake 3D" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Snake 3D – Free Online Snake Game" />
+    <meta name="twitter:description" content="Play Snake 3D free online with portals, combos, endless mode and 10 levels." />
+    <meta name="twitter:image" content="https://snake3dgame.online/og-snake-3d.png" />
+    <meta name="twitter:image:alt" content="Snake 3D green snake and apple logo" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://snake3dgame.online/#website",
+            "url": "https://snake3dgame.online/",
+            "name": "Snake 3D",
+            "alternateName": ["Snake 3D Game", "Snake3DGame.online"],
+            "inLanguage": "en"
+          },
+          {
+            "@type": "VideoGame",
+            "@id": "https://snake3dgame.online/#game",
+            "url": "https://snake3dgame.online/",
+            "name": "Snake 3D",
+            "description": "A free online 3D snake game with endless mode, 10 levels, portals, combos and touch controls.",
+            "image": "https://snake3dgame.online/og-snake-3d.png",
+            "genre": ["Arcade", "Casual", "Snake"],
+            "gamePlatform": "Web browser",
+            "operatingSystem": "Any",
+            "playMode": "SinglePlayer",
+            "isAccessibleForFree": true,
+            "inLanguage": ["en", "pt-BR", "es", "fr", "de", "it", "ja", "ko", "zh-CN", "ru"],
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock"
+            },
+            "isPartOf": { "@id": "https://snake3dgame.online/#website" }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="app">
-      <canvas id="game-canvas" aria-label="Snake 3D"></canvas>
+      <canvas id="game-canvas" aria-label="Snake 3D free online browser game"></canvas>
 
       <div id="hud" class="hud hidden">
         <div class="scoreboard">
-          <div><span id="label-points">PONTOS</span><strong id="score">0</strong></div>
-          <div><span id="label-best">RECORDE</span><strong id="best">0</strong></div>
+          <div><span id="label-points">SCORE</span><strong id="score">0</strong></div>
+          <div><span id="label-best">BEST</span><strong id="best">0</strong></div>
           <div><span id="label-combo">COMBO</span><strong id="combo">×1</strong></div>
         </div>
         <div id="stage-label" class="stage-label">ENDLESS</div>
         <div id="goal" class="goal hidden">0 / 5 FRUTAS</div>
-        <button id="pause-button" class="icon-button" aria-label="Pausar">Ⅱ</button>
-        <div id="speed" class="speed">VELOCIDADE 1</div>
+        <button id="pause-button" class="icon-button" aria-label="Pause">Ⅱ</button>
+        <div id="speed" class="speed">SPEED 1</div>
       </div>
 
       <div id="event-message" class="event-message hidden"></div>
@@ -33,39 +99,39 @@
 
       <section id="start-screen" class="screen menu-screen">
         <div class="menu-tools">
-          <button id="language-button" aria-label="Idioma">🌐 PT</button>
-          <button id="settings-button" aria-label="Configurações">⚙</button>
+          <button id="language-button" aria-label="Language">🌐 EN</button>
+          <button id="settings-button" aria-label="Settings">⚙</button>
         </div>
         <div class="snake-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
         <h1>SNAKE 3D</h1>
-        <p id="tagline">Coma, cresça e use os portais. Escolha uma corrida infinita ou avance por mapas com novos desafios.</p>
+        <p id="tagline">Play Snake 3D free online. Eat fruit, grow, use portals, and beat endless runs or 10 challenging levels.</p>
         <div id="mode-buttons" class="mode-buttons">
           <button id="endless-button" class="primary">ENDLESS</button>
-          <button id="levels-button" class="secondary mode-secondary">FASES</button>
+          <button id="levels-button" class="secondary mode-secondary">LEVELS</button>
         </div>
         <div id="level-panel" class="level-panel hidden">
-          <p id="choose-map">ESCOLHA O MAPA</p>
+          <p id="choose-map">CHOOSE A MAP</p>
           <div id="level-grid"></div>
-          <button id="back-button" class="text-button">Voltar</button>
+          <button id="back-button" class="text-button">Back</button>
         </div>
-        <div id="controls" class="controls"><b>WASD</b> ou <b>SETAS</b> · <b>ESC</b> pausa</div>
+        <div id="controls" class="controls"><b>WASD</b> or <b>ARROWS</b> · <b>ESC</b> pauses</div>
         <div id="adsterra-menu-bottom" class="ad-slot ad-menu-bottom"><span>AD</span><!-- Adsterra 728x90: inserir o script fornecido pelo painel aqui --></div>
       </section>
 
       <section id="pause-screen" class="screen compact hidden">
-        <h2 id="paused-title">PAUSADO</h2>
-        <button id="resume-button" class="primary">CONTINUAR</button>
-        <button id="restart-pause-button" class="secondary">REINICIAR</button>
-        <button id="settings-pause-button" class="text-button">CONFIGURAÇÕES</button>
-        <button id="menu-pause-button" class="text-button">Menu principal</button>
+        <h2 id="paused-title">PAUSED</h2>
+        <button id="resume-button" class="primary">CONTINUE</button>
+        <button id="restart-pause-button" class="secondary">RESTART</button>
+        <button id="settings-pause-button" class="text-button">SETTINGS</button>
+        <button id="menu-pause-button" class="text-button">Main menu</button>
       </section>
 
       <section id="end-screen" class="screen compact hidden">
-        <h2 id="end-title">FIM DE JOGO</h2>
+        <h2 id="end-title">GAME OVER</h2>
         <p id="end-stats"></p>
-        <button id="next-button" class="primary">JOGAR NOVAMENTE</button>
-        <button id="share-button" class="share-button hidden">𝕏&nbsp; COMPARTILHAR NO X</button>
-        <button id="menu-button" class="text-button">Menu principal</button>
+        <button id="next-button" class="primary">PLAY AGAIN</button>
+        <button id="share-button" class="share-button hidden">𝕏&nbsp; SHARE ON X</button>
+        <button id="menu-button" class="text-button">Main menu</button>
       </section>
 
       <section id="revive-screen" class="screen compact revive-screen hidden">
@@ -75,20 +141,20 @@
       </section>
 
       <section id="settings-screen" class="screen compact settings-screen hidden" role="dialog" aria-modal="true">
-        <h2 id="settings-title">CONFIGURAÇÕES</h2>
+        <h2 id="settings-title">SETTINGS</h2>
         <div class="settings-form">
-          <label for="language-select" id="language-label">Idioma</label>
+          <label for="language-select" id="language-label">Language</label>
           <select id="language-select"></select>
-          <label for="quality-select" id="quality-label">Qualidade gráfica</label>
+          <label for="quality-select" id="quality-label">Graphics quality</label>
           <select id="quality-select">
-            <option value="low">Baixa</option>
-            <option value="medium">Média</option>
-            <option value="high">Alta</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
           </select>
-          <label for="sound-select" id="sound-label">Sons</label>
+          <label for="sound-select" id="sound-label">Sound</label>
           <select id="sound-select">
-            <option value="on">Ligados</option>
-            <option value="off">Desligados</option>
+            <option value="on">On</option>
+            <option value="off">Off</option>
           </select>
           <label for="controls-size-select" id="controls-size-label" class="mobile-only-setting">Control size</label>
           <select id="controls-size-select" class="mobile-only-setting">
@@ -97,8 +163,7 @@
             <option value="xlarge">XL</option>
           </select>
         </div>
-        <p id="swipe-hint" class="swipe-hint mobile-only-setting">You can also swipe anywhere on the game screen.</p>
-        <button id="settings-close-button" class="primary">SALVAR E FECHAR</button>
+        <button id="settings-close-button" class="primary">SAVE AND CLOSE</button>
       </section>
 
       <div id="mobile-controls" class="mobile-controls hidden" aria-label="Directional controls">
@@ -108,6 +173,12 @@
         <button data-key="ArrowRight" aria-label="Right">▶</button>
       </div>
     </div>
+    <noscript>
+      <main>
+        <h1>Snake 3D – Free Online Snake Game</h1>
+        <p>Enable JavaScript to play this free browser-based 3D snake game with endless mode, portals and 10 levels.</p>
+      </main>
+    </noscript>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
