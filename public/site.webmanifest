@@ -1,0 +1,27 @@
+{
+  "name": "Snake 3D – Free Online Snake Game",
+  "short_name": "Snake 3D",
+  "description": "Play a free 3D snake game online with endless mode, levels, portals and combos.",
+  "lang": "en",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#111511",
+  "theme_color": "#111511",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
