@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "check:dom": "node scripts/check-dom.mjs",
+    "build": "npm run check:dom && tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
