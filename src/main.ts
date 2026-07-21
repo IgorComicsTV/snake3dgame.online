@@ -13,11 +13,13 @@ const hud = get('hud');
 const startScreen = get('start-screen');
 const pauseScreen = get('pause-screen');
 const endScreen = get('end-screen');
+const reviveScreen = get('revive-screen');
 const settingsScreen = get('settings-screen');
 const modeButtons = get('mode-buttons');
 const levelPanel = get('level-panel');
 const mobileControls = get('mobile-controls');
 const eventMessage = get('event-message');
+const readyMessage = get('ready-message');
 const gameAds = get('game-ads');
 const shareButton = get<HTMLButtonElement>('share-button');
 const languageSelect = get<HTMLSelectElement>('language-select');
@@ -32,16 +34,14 @@ let settingsReturn: 'menu' | 'pause' = 'menu';
 let preferences = loadPreferences();
 
 function loadPreferences(): Preferences {
-  const browserLocale = navigator.language as Locale;
-  const fallbackLocale: Locale = browserLocale in localeLabels ? browserLocale : (navigator.language.split('-')[0] as Locale) in localeLabels ? navigator.language.split('-')[0] as Locale : 'en';
   try {
     const saved = JSON.parse(localStorage.getItem('snake-3d-preferences') ?? '{}') as Partial<Preferences>;
     return {
-      locale: saved.locale && saved.locale in localeLabels ? saved.locale : fallbackLocale,
+      locale: 'en',
       quality: ['low', 'medium', 'high'].includes(saved.quality ?? '') ? saved.quality as Quality : 'high',
       sound: saved.sound ?? true,
     };
-  } catch { return { locale: fallbackLocale, quality: 'high', sound: true }; }
+  } catch { return { locale: 'en', quality: 'high', sound: true }; }
 }
 
 function savePreferences(): void {
@@ -55,7 +55,9 @@ function start(mode = selectedMode, level = selectedLevel): void {
   startScreen.classList.add('hidden');
   pauseScreen.classList.add('hidden');
   endScreen.classList.add('hidden');
+  reviveScreen.classList.add('hidden');
   settingsScreen.classList.add('hidden');
+  readyMessage.classList.add('hidden');
   hud.classList.remove('hidden');
   gameAds.classList.remove('hidden');
   mobileControls.classList.toggle('hidden', !isTouch);
@@ -66,9 +68,11 @@ function showMenu(): void {
   hud.classList.add('hidden');
   pauseScreen.classList.add('hidden');
   endScreen.classList.add('hidden');
+  reviveScreen.classList.add('hidden');
   settingsScreen.classList.add('hidden');
   gameAds.classList.add('hidden');
   mobileControls.classList.add('hidden');
+  readyMessage.classList.add('hidden');
   levelPanel.classList.add('hidden');
   modeButtons.classList.remove('hidden');
   startScreen.classList.remove('hidden');
@@ -132,6 +136,9 @@ function applyTranslations(): void {
   get('quality-label').textContent = t.quality;
   get('sound-label').textContent = t.sound;
   get('settings-close-button').textContent = t.close;
+  get('revive-title').textContent = t.secondLife;
+  get('revive-copy').textContent = t.returningIn;
+  readyMessage.textContent = t.chooseDirection;
   get('label-points').textContent = t.points;
   get('label-best').textContent = t.best;
   get('label-combo').textContent = t.combo;
@@ -160,6 +167,7 @@ function updateHud(state: SnakeState): void {
   const goal = get('goal');
   goal.classList.toggle('hidden', state.map.goal === null);
   if (state.map.goal !== null) goal.textContent = `${state.eaten} / ${state.map.goal} ${t.fruits.toUpperCase()}`;
+  readyMessage.classList.toggle('hidden', state.phase !== 'ready');
 }
 
 function renderEnd(won: boolean, state: SnakeState): void {
@@ -168,7 +176,7 @@ function renderEnd(won: boolean, state: SnakeState): void {
   get('end-title').textContent = won ? (hasNext ? t.stageComplete : t.allComplete) : t.gameOver;
   get('end-stats').textContent = `${state.score.toLocaleString(preferences.locale)} ${t.points.toLowerCase()} · ${state.eaten} ${t.fruits.toLowerCase()} · ${t.combo.toLowerCase()} ×${state.multiplier}`;
   get('next-button').textContent = hasNext ? t.nextStage : t.playAgain;
-  shareButton.classList.toggle('hidden', state.mode !== 'endless');
+  shareButton.classList.toggle('hidden', state.mode !== 'endless' || state.secondLifeUsed);
   get<HTMLButtonElement>('next-button').onclick = () => start(state.mode, hasNext ? state.levelIndex + 1 : state.levelIndex);
 }
 
@@ -179,6 +187,7 @@ game.onEnd = (won, state) => {
   hud.classList.add('hidden');
   gameAds.classList.add('hidden');
   mobileControls.classList.add('hidden');
+  readyMessage.classList.add('hidden');
   endScreen.classList.remove('hidden');
   renderEnd(won, state);
 };
@@ -220,10 +229,30 @@ get('settings-button').addEventListener('click', () => showSettings('menu'));
 get('settings-pause-button').addEventListener('click', () => showSettings('pause'));
 get('settings-close-button').addEventListener('click', closeSettings);
 shareButton.addEventListener('click', () => {
-  if (!lastEnd || lastEnd.state.mode !== 'endless') return;
+  if (!lastEnd || lastEnd.state.mode !== 'endless' || lastEnd.state.secondLifeUsed) return;
   const text = getTranslation(preferences.locale).shareText.replace('{score}', lastEnd.state.score.toLocaleString(preferences.locale));
   window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`${text} #Snake3D`)}`, '_blank', 'noopener,noreferrer,width=720,height=520');
+  beginSecondLifeCountdown();
 });
+
+function beginSecondLifeCountdown(): void {
+  endScreen.classList.add('hidden');
+  reviveScreen.classList.remove('hidden');
+  const countdown = get('revive-countdown');
+  const endsAt = Date.now() + 5_000;
+  countdown.textContent = '5';
+  const timer = window.setInterval(() => {
+    const seconds = Math.max(0, Math.ceil((endsAt - Date.now()) / 1_000));
+    countdown.textContent = String(seconds);
+    if (seconds > 0) return;
+    clearInterval(timer);
+    reviveScreen.classList.add('hidden');
+    if (!game.revive()) { endScreen.classList.remove('hidden'); return; }
+    hud.classList.remove('hidden');
+    gameAds.classList.remove('hidden');
+    mobileControls.classList.toggle('hidden', !isTouch);
+  }, 100);
+}
 
 addEventListener('keydown', (event) => {
   if (event.code !== 'Escape' && event.code !== 'KeyP') return;
@@ -241,4 +270,20 @@ if (import.meta.env.DEV) {
   if (preview) setTimeout(() => preview === 'endless' ? start('endless', 0) : start('levels', Math.max(0, Number(preview) - 1)), 120);
   if (params.has('settings')) setTimeout(() => showSettings('menu'), 120);
   if (params.has('levels')) setTimeout(() => { modeButtons.classList.add('hidden'); levelPanel.classList.remove('hidden'); }, 120);
+  if (params.has('preview-revive')) setTimeout(() => {
+    start('endless', 0);
+    game.state.score = 2_400;
+    game.state.eaten = 18;
+    game.state.phase = 'lost';
+    lastEnd = { won: false, state: game.state };
+    beginSecondLifeCountdown();
+  }, 120);
+  if (params.has('preview-ready')) setTimeout(() => {
+    start('endless', 0);
+    game.state.phase = 'lost';
+    if (game.revive()) {
+      hud.classList.remove('hidden');
+      gameAds.classList.remove('hidden');
+    }
+  }, 120);
 }

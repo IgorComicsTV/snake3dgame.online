@@ -1,6 +1,6 @@
 import { getMap, type GameMode, type LevelDefinition } from './levels';
 
-export type Phase = 'menu' | 'playing' | 'paused' | 'lost' | 'won';
+export type Phase = 'menu' | 'ready' | 'playing' | 'paused' | 'lost' | 'won';
 export type Direction = { x: number; z: number };
 export type GridPoint = { x: number; z: number };
 
@@ -19,6 +19,7 @@ export interface SnakeState {
   multiplier: number;
   stepTime: number;
   elapsed: number;
+  secondLifeUsed: boolean;
 }
 
 export interface StepResult {
@@ -36,7 +37,7 @@ export function createState(mode: GameMode = 'endless', levelIndex = 0, best = 0
     food: findFreeCell(snake, map),
     direction: { x: 1, z: 0 }, queuedDirection: { x: 1, z: 0 },
     score: 0, best, eaten: 0, multiplier: 1,
-    stepTime: map.startSpeed, elapsed: 0,
+    stepTime: map.startSpeed, elapsed: 0, secondLifeUsed: false,
   };
 }
 
@@ -103,5 +104,58 @@ export function findFreeCell(snake: GridPoint[], map: LevelDefinition, random = 
   }
   return free[Math.floor(random() * free.length)] ?? { x: 0, z: 0 };
 }
+
+export function reviveEndless(state: SnakeState): boolean {
+  if (state.mode !== 'endless' || state.phase !== 'lost' || state.secondLifeUsed) return false;
+  const revivedSnake = buildCenteredRespawn(state.snake.length, state.map);
+  if (revivedSnake.length !== state.snake.length) return false;
+  state.snake = revivedSnake;
+  state.direction = { x: 1, z: 0 };
+  state.queuedDirection = { x: 1, z: 0 };
+  state.secondLifeUsed = true;
+  state.phase = 'ready';
+  if (state.snake.some((part) => sameCell(part, state.food))) state.food = findFreeCell(state.snake, state.map);
+  return true;
+}
+
+function buildCenteredRespawn(length: number, map: LevelDefinition): GridPoint[] {
+  const half = map.boardHalf;
+  const totalCells = (half * 2 + 1) ** 2 - map.obstacles.length;
+  const reservedCells = Math.max(1, Math.min(5, totalCells - length));
+  const reserved = new Set(Array.from({ length: reservedCells }, (_, index) => `${index + 1},0`));
+  const blocked = new Set(map.obstacles.map((point) => `${point.x},${point.z}`));
+  const path: GridPoint[] = [{ x: 0, z: 0 }];
+  const visited = new Set(['0,0']);
+  let attempts = 0;
+
+  const availableDegree = (point: GridPoint): number => neighbors(point).filter((next) => isAvailable(next)).length;
+  const isAvailable = (point: GridPoint): boolean => {
+    const key = `${point.x},${point.z}`;
+    return Math.abs(point.x) <= half && Math.abs(point.z) <= half && !blocked.has(key) && !reserved.has(key) && !visited.has(key);
+  };
+  const search = (point: GridPoint): boolean => {
+    attempts += 1;
+    if (path.length === length) return true;
+    if (attempts > 120_000) return false;
+    const options = neighbors(point).filter(isAvailable).sort((a, b) => availableDegree(a) - availableDegree(b));
+    for (const next of options) {
+      const key = `${next.x},${next.z}`;
+      visited.add(key);
+      path.push(next);
+      if (search(next)) return true;
+      path.pop();
+      visited.delete(key);
+    }
+    return false;
+  };
+  return search(path[0]) ? path : [];
+}
+
+const neighbors = (point: GridPoint): GridPoint[] => [
+  { x: point.x - 1, z: point.z },
+  { x: point.x, z: point.z - 1 },
+  { x: point.x, z: point.z + 1 },
+  { x: point.x + 1, z: point.z },
+];
 
 const sameCell = (a: GridPoint, b: GridPoint): boolean => a.x === b.x && a.z === b.z;

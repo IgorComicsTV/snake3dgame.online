@@ -79,6 +79,10 @@ h2 { font-size: clamp(48px, 7vw, 82px); }
 .event-message { position: absolute; top: 42%; left: 50%; transform: translate(-50%, -50%) scale(.8); color: #fff2a7; font-family: 'Barlow Condensed', sans-serif; font-size: clamp(32px, 5vw, 58px); font-weight: 800; letter-spacing: .06em; text-shadow: 0 2px 0 #293019; pointer-events: none; opacity: 0; }
 .event-message.pop { animation: event-pop 620ms ease-out forwards; }
 @keyframes event-pop { 0% { opacity: 0; transform: translate(-50%, -40%) scale(.72); } 18%, 62% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -65%) scale(1.05); } }
+.ready-message { position: absolute; top: 43%; left: 50%; transform: translate(-50%, -50%); padding: 10px 14px; color: #fff3b0; background: rgba(18, 24, 17, .88); border-bottom: 2px solid var(--green); font-family: 'Barlow Condensed', sans-serif; font-size: clamp(18px, 2.4vw, 28px); font-weight: 800; letter-spacing: .07em; pointer-events: none; z-index: 8; }
+.revive-screen { z-index: 18; }
+.revive-screen > p { margin: 18px 0 0; }
+.revive-screen > strong { color: var(--green); font-family: 'Barlow Condensed', sans-serif; font-size: clamp(92px, 15vw, 170px); line-height: .9; }
 
 .settings-screen { z-index: 20; }
 .settings-screen h2 { margin-bottom: 26px; }
