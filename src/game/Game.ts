@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { Sound } from './audio';
 import { Input } from './input';
 import { type GameMode, type LevelDefinition } from './levels';
-import { advanceSnake, createState, isReverse, type Direction, type GridPoint, type SnakeState } from './simulation';
+import { advanceSnake, createState, isReverse, reviveEndless, type Direction, type GridPoint, type SnakeState } from './simulation';
 
 interface Particle {
   mesh: THREE.Mesh;
@@ -207,18 +207,44 @@ export class Game {
     this.resize();
   }
 
+  revive(): boolean {
+    if (!reviveEndless(this.state)) return false;
+    this.accumulator = 0;
+    this.turnBuffer.length = 0;
+    this.input.clear();
+    this.clearSnake();
+    this.syncSnake(true);
+    this.syncFood();
+    this.spawnBurst({ x: 0, z: 0 }, 0xffd65a, 24);
+    this.cameraPunch = 0.35;
+    this.onUpdate?.(this.state);
+    return true;
+  }
+
   private loop(): void {
     requestAnimationFrame(() => this.loop());
     const dt = Math.min(this.clock.getDelta(), 0.05);
-    if (this.state.phase === 'playing') this.update(dt);
+    if (this.state.phase === 'playing' || this.state.phase === 'ready') this.update(dt);
     this.animateScene(dt);
     this.renderer.render(this.scene, this.camera);
   }
 
   private update(dt: number): void {
+    const inputDirections = this.input.drain();
+    if (this.state.phase === 'ready') {
+      const direction = inputDirections.find((requested) => this.isSafeStart(requested));
+      if (!direction) return;
+      this.state.direction = direction;
+      this.state.queuedDirection = direction;
+      this.state.phase = 'playing';
+      this.accumulator = 0;
+      this.onEvent?.('GO!');
+      this.onUpdate?.(this.state);
+      return;
+    }
     this.state.elapsed += dt;
     let acceptedTurn = false;
-    for (const requested of this.input.drain()) {
+    for (const requested of inputDirections) {
       const base = this.turnBuffer.at(-1) ?? this.state.direction;
       if (isReverse(requested, base) || (requested.x === base.x && requested.z === base.z)) continue;
       if (this.turnBuffer.length < 2) {
@@ -259,6 +285,15 @@ export class Game {
       this.sound.level();
       setTimeout(() => this.onEnd?.(true, this.state), 420);
     }
+  }
+
+  private isSafeStart(direction: Direction): boolean {
+    const head = this.state.snake[0];
+    const next = { x: head.x + direction.x, z: head.z + direction.z };
+    const inside = Math.abs(next.x) <= this.state.map.boardHalf && Math.abs(next.z) <= this.state.map.boardHalf;
+    const blockedByBody = this.state.snake.slice(1).some((part) => part.x === next.x && part.z === next.z);
+    const blockedByMap = this.state.map.obstacles.some((part) => part.x === next.x && part.z === next.z);
+    return inside && !blockedByBody && !blockedByMap;
   }
 
   private syncSnake(immediate: boolean, teleported = false): void {
