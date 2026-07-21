@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "check:dom": "node scripts/check-dom.mjs",
-    "build": "npm run check:dom && tsc && vite build",
+    "build": "npm run check:dom && tsc && vite build && node scripts/postbuild.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake Strategy – 15 Tips for a Higher Score</title>
+    <meta name="description" content="Improve your Snake score with practical route planning, tail management, portal strategy, combo timing and high-speed survival tips." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://snake3dgame.online/tips/" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Barlow:wght@400;600&amp;display=swap" rel="stylesheet" />
+    <meta property="og:type" content="article" /><meta property="og:title" content="Snake Strategy: 15 Tips" /><meta property="og:description" content="Route planning, tail management and portal tactics for longer Snake runs." /><meta property="og:url" content="https://snake3dgame.online/tips/" /><meta property="og:image" content="https://snake3dgame.online/snake-score.webp" /><meta property="og:site_name" content="Snake 3D" />
+    <script type="application/ld+json">
+      { "@context": "https://schema.org", "@graph": [
+        { "@type": "WebPage", "@id": "https://snake3dgame.online/tips/#webpage", "url": "https://snake3dgame.online/tips/", "name": "Snake Strategy – 15 Tips for a Higher Score", "description": "Practical Snake strategy for route planning, space management, portals and combos.", "isPartOf": { "@id": "https://snake3dgame.online/#website" }, "inLanguage": "en" },
+        { "@type": "BreadcrumbList", "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Snake Game", "item": "https://snake3dgame.online/" },
+          { "@type": "ListItem", "position": 2, "name": "Tips", "item": "https://snake3dgame.online/tips/" }
+        ] }
+      ] }
+    </script>
+  </head>
+  <body>
+    <header class="content-header"><div><a class="brand" href="/">SNAKE 3D</a><nav class="content-nav" aria-label="Main navigation"><a href="/play/">Play</a><a href="/how-to-play/">How to Play</a><a href="/controls/">Controls</a><a href="/tips/" aria-current="page">Tips</a><a href="/mobile/">Mobile</a><a href="/faq/">FAQ</a><a href="/history/">History</a></nav></div></header>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Snake Game</a> / Tips</nav>
+    <main class="content-main">
+      <h1>Snake Strategy and Tips</h1>
+      <p class="summary">The best general Snake strategy is to preserve open space. Use wide, predictable routes, keep the body organized, and avoid entering any area unless the head has a clear exit.</p>
+      <a class="play-cta" href="/play/">Practice in Endless mode</a>
+      <figure class="guide-image"><img src="/snake-score.webp" width="1200" height="675" alt="Snake 3D score, best score and combo display during a long run" /><figcaption>Score matters, but space is the resource that keeps a long run alive.</figcaption></figure>
+
+      <h2>1. Protect space before chasing points</h2>
+      <p>Fruit is important, but open cells are what keep the run alive. Before taking the shortest path, ask where the head will go after the pickup. If the fruit sits inside a narrow pocket, approach from a direction that leaves the opening behind the head instead of behind the body.</p>
+
+      <h2>2. Use the outside edge early</h2>
+      <p>Large loops around the board create an orderly body shape. The tail follows the same broad route, so future openings are easier to predict. Cutting repeatedly through the middle creates many short body lines that can divide the board into disconnected areas.</p>
+
+      <h2>3. Think in two routes</h2>
+      <p>Plan a route to the fruit and a route away from it. A pickup is not safe merely because the head can reach it. The exit route must still exist after the new segment is added and the body advances.</p>
+
+      <h2>4. Follow the tail when crowded</h2>
+      <p>The tail usually vacates one cell every simulation step unless growth is being added. Moving toward the area behind the tail can create a controlled escape path because those cells are becoming free. Do not aim at the current tail cell blindly; consider whether a recent pickup will delay its movement.</p>
+
+      <h2>5. Avoid tight spirals too early</h2>
+      <p>A spiral can compress a long snake efficiently, but it is difficult to reverse safely. If the head winds inward without enough separation between adjacent body lines, there may be no legal route back to the outside. Use broad rows first and tighten only when the board requires it.</p>
+
+      <h2>6. Turn before the emergency</h2>
+      <p>At higher speed, reacting when the head reaches the final open cell is unreliable. Choose the turn one or two steps early. The input queue will preserve a valid planned corner, which is safer than pressing several keys after the collision path is already fixed.</p>
+
+      <h2>7. Keep parallel body lines separated</h2>
+      <p>When moving back and forth across the board, leave a corridor between adjacent lines whenever possible. That corridor becomes a future route for the head. Packing lines directly beside one another may fill space efficiently, but it removes crossing options.</p>
+
+      <h2>8. Treat portals as exits, not shortcuts</h2>
+      <p>A portal is valuable when its exit opens a safer region of the board. Before entering, locate the paired portal, check the exit direction, and identify the next turn. Entering without reading the exit can place the head against a wall or into a body segment with almost no response time.</p>
+
+      <h2>9. Use portals to reconnect divided space</h2>
+      <p>A long body can split the board into two regions. If each portal sits in a different region, the pair can restore access that a normal route cannot provide. Preserve the approach to at least one portal rather than wrapping the body around both entrances.</p>
+
+      <h2>10. Build combos only on safe routes</h2>
+      <p>The combo multiplier rewards quick fruit collection, but a multiplier is never worth a forced collision. Use the shortest route when it remains open. Let the combo reset when the direct path would put the head inside a closing loop.</p>
+
+      <h2>11. Read obstacles as permanent body segments</h2>
+      <p>Level obstacles never move, so plan around them as if they were body cells that the tail will never clear. Avoid circling a small obstacle too closely. The snake can wrap around it and close the only exit with its own body.</p>
+
+      <h2>12. Use Level goals to control risk</h2>
+      <p>A level ends after its fruit target is reached. You do not need to maximize length on every map. Early pickups can be aggressive when the board is open; the final pickups should favor simple routes that protect the completed run.</p>
+
+      <h2>13. Reduce visual load when speed rises</h2>
+      <p>Focus on the next turn, the nearest body line, and the available exit. Looking repeatedly at the score can steal the short moment needed to read the grid. The HUD updates automatically and the final score remains available after the run.</p>
+
+      <h2>14. Use quality settings for stable input</h2>
+      <p>If a device struggles to render the 3D board smoothly, lower Graphics quality in Settings. The game simulation remains grid-based, but stable visual feedback makes it easier to time turns and understand the snake’s position.</p>
+
+      <h2>15. Practice one constraint at a time</h2>
+      <p>Use early levels to practice orderly loops, then focus on portals, obstacles, or higher starting speed. In Endless mode, compare decisions rather than only scores: note whether a run ended because of a late turn, a closed pocket, a misunderstood portal exit, or a risky combo route.</p>
+
+      <h2>A simple beginner pattern</h2>
+      <p>Move in long horizontal rows and use the outermost column to turn into the next row. Keep one vertical corridor open on the opposite side so the head can travel between the top and bottom of the board. This pattern is not a guaranteed solution on every map, but it teaches spacing and creates fewer accidental pockets than random movement.</p>
+      <p>Combine this pattern with the exact <a href="/controls/">control timing</a> and the rules in <a href="/how-to-play/">How to Play Snake</a>. If you play by touch, review the <a href="/mobile/">mobile setup guide</a> before practicing high-speed turns.</p>
+      <div class="next-guide"><strong>Next guide:</strong> <a href="/faq/">Snake Game FAQ</a></div>
+    </main>
+    <footer class="content-footer"><div><a href="/play/">Play</a><a href="/how-to-play/">How to Play</a><a href="/controls/">Controls</a><a href="/tips/">Tips</a><a href="/mobile/">Mobile</a><a href="/faq/">FAQ</a><a href="/history/">History</a></div></footer>
+    <script type="module" src="/src/content.ts"></script>
+  </body>
+</html>

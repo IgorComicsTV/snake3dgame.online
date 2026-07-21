@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Snake 3D – Free Online Snake Game to Play at School</title>
-    <meta name="description" content="Play Snake 3D free online in your browser. Enjoy endless mode, 10 challenging levels, portals, combos and mobile controls—no download required." />
+    <title>Snake Game – Play Snake 3D Online Free</title>
+    <meta name="description" content="Play Snake online for free in your browser. Classic snake gameplay in 3D with endless mode, 10 levels, portals and mobile controls. No download required." />
     <meta name="keywords" content="snake game, snake game 3D, free online games, games to play at school, browser games, unblocked snake game, jogo da cobrinha, jogos grátis" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="author" content="Snake 3D" />
@@ -48,6 +48,23 @@
             "inLanguage": "en"
           },
           {
+            "@type": "Organization",
+            "@id": "https://snake3dgame.online/#organization",
+            "name": "Snake 3D",
+            "url": "https://snake3dgame.online/",
+            "logo": "https://snake3dgame.online/icon-512.png"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://snake3dgame.online/#webpage",
+            "url": "https://snake3dgame.online/",
+            "name": "Snake Game – Play Snake 3D Online Free",
+            "description": "Play a free online 3D snake game with endless mode, levels, portals and touch controls.",
+            "isPartOf": { "@id": "https://snake3dgame.online/#website" },
+            "about": { "@id": "https://snake3dgame.online/#game" },
+            "inLanguage": "en"
+          },
+          {
             "@type": "VideoGame",
             "@id": "https://snake3dgame.online/#game",
             "url": "https://snake3dgame.online/",
@@ -66,7 +83,12 @@
               "priceCurrency": "USD",
               "availability": "https://schema.org/InStock"
             },
-            "isPartOf": { "@id": "https://snake3dgame.online/#website" }
+            "isPartOf": { "@id": "https://snake3dgame.online/#website" },
+            "publisher": { "@id": "https://snake3dgame.online/#organization" },
+            "potentialAction": {
+              "@type": "PlayAction",
+              "target": "https://snake3dgame.online/#play"
+            }
           }
         ]
       }
@@ -98,13 +120,21 @@
       </aside>
 
       <section id="start-screen" class="screen menu-screen">
+        <nav class="site-nav" aria-label="Snake game guides">
+          <a href="/how-to-play/">How to Play</a>
+          <a href="/controls/">Controls</a>
+          <a href="/tips/">Tips</a>
+          <a href="/faq/">FAQ</a>
+          <a href="/history/">History</a>
+        </nav>
         <div class="menu-tools">
           <button id="language-button" aria-label="Language">🌐 EN</button>
           <button id="settings-button" aria-label="Settings">⚙</button>
         </div>
         <div class="snake-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <h1>SNAKE 3D</h1>
+        <h1 id="play">SNAKE 3D</h1>
         <p id="tagline">Play Snake 3D free online. Eat fruit, grow, use portals, and beat endless runs or 10 challenging levels.</p>
+        <p class="quick-facts">Play instantly · No download · Desktop and mobile</p>
         <div id="mode-buttons" class="mode-buttons">
           <button id="endless-button" class="primary">ENDLESS</button>
           <button id="levels-button" class="secondary mode-secondary">LEVELS</button>
@@ -174,6 +204,102 @@
         <button data-key="ArrowRight" aria-label="Right">▶</button>
       </div>
     </div>
+    <main class="game-info" aria-label="About Snake 3D">
+      <header class="game-info-intro">
+        <h2>Play Snake online</h2>
+        <p class="direct-answer">Snake is a classic arcade game where you guide a growing snake, collect food, and avoid crashing into walls or your own tail. Snake 3D keeps those simple rules and adds portals, combos, ten maps, and an endless mode.</p>
+        <a class="play-link" href="#play">Play Snake now</a>
+      </header>
+
+      <nav class="topic-links" aria-label="Snake game topics">
+        <a href="/how-to-play/">How to play</a>
+        <a href="/controls/">Controls</a>
+        <a href="/tips/">Strategy tips</a>
+        <a href="/mobile/">Mobile play</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/history/">History</a>
+      </nav>
+
+      <section id="how-to-play">
+        <h2>How to Play Snake</h2>
+        <p>Choose Endless or Levels, then move in one of four directions. Eat the fruit to add a segment to the snake and increase your score. Plan every turn early: the longer the snake becomes, the less open space remains. A run ends when the head hits the snake’s body or a solid obstacle.</p>
+        <p>This version begins at a readable pace and becomes faster as you score. Portals move the head to the opposite side of the board while preserving direction. Consecutive fruit pickups build a combo multiplier, so efficient routes earn more points than slow, isolated pickups.</p>
+        <a href="/how-to-play/">Read the complete rules and beginner guide</a>
+      </section>
+
+      <section id="snake-controls">
+        <h2>Snake Controls</h2>
+        <div class="info-columns">
+          <div>
+            <h3>Desktop</h3>
+            <p>Use the arrow keys or W, A, S, and D. Press Escape or P to pause. Inputs are queued, which lets you prepare a quick corner without waiting for the next movement step.</p>
+          </div>
+          <div>
+            <h3>Mobile</h3>
+            <p>Swipe across an open part of the game screen or use the four arrow buttons. The control size can be changed to Medium, Large, or Extra Large in Settings.</p>
+          </div>
+        </div>
+        <a href="/controls/">See every keyboard and touch control</a>
+      </section>
+
+      <section id="game-modes">
+        <h2>Snake Game Modes</h2>
+        <div class="info-columns">
+          <div>
+            <h3>Endless</h3>
+            <p>Keep growing for as long as possible. Speed increases during the run, your best score is saved on the device, and sharing a final score on X unlocks one second-life attempt.</p>
+          </div>
+          <div>
+            <h3>Levels</h3>
+            <p>Progress through ten boards with different layouts, goals, obstacles, portal positions, and starting speeds. Later maps demand tighter turns and better space management.</p>
+          </div>
+        </div>
+        <a href="/tips/">Learn strategies for longer runs</a>
+      </section>
+
+      <section id="snake-faq">
+        <h2>Snake Game FAQ</h2>
+        <details>
+          <summary>Is Snake 3D free?</summary>
+          <p>Yes. The game is free to play in a modern web browser and does not require a download or account.</p>
+        </details>
+        <details>
+          <summary>Can I play Snake on mobile?</summary>
+          <p>Yes. Use swipe gestures or the on-screen arrow controls. Control size and graphics quality can be changed in Settings.</p>
+        </details>
+        <details>
+          <summary>Does the game save my best score?</summary>
+          <p>Yes. Your personal best and preferences are saved locally in the browser on the current device. There is no online leaderboard.</p>
+        </details>
+        <details>
+          <summary>Can I play at school?</summary>
+          <p>The game runs in a browser without installation. Availability still depends on the school’s device and network policies; it does not bypass network restrictions.</p>
+        </details>
+        <a href="/faq/">Browse all Snake questions and answers</a>
+      </section>
+
+      <section id="snake-history">
+        <h2>History of Snake</h2>
+        <p>Snake belongs to a family of maze games that became popular in the late 1970s. The idea spread across home computers and calculators because the rules were easy to understand and the game required very little hardware. Its best-known mainstream breakthrough came when a version was included on Nokia phones in the late 1990s.</p>
+        <p>Modern browser versions keep the original loop—move, eat, grow, survive—while adding smoother input, touch controls, new board designs, and visual depth. Snake 3D follows that tradition without replacing the core challenge.</p>
+        <a href="/history/">Read the detailed history of Snake</a>
+      </section>
+
+      <section id="high-scores">
+        <h2>High Scores</h2>
+        <p>Snake 3D stores a personal best score in your browser. Scores are not uploaded, shared publicly, or combined into a global ranking. This keeps the current game fast and private while there is no backend.</p>
+      </section>
+
+      <footer class="site-footer">
+        <a href="#play">Play</a>
+        <a href="/how-to-play/">How to Play</a>
+        <a href="/controls/">Controls</a>
+        <a href="/tips/">Tips</a>
+        <a href="/mobile/">Mobile</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/history/">History</a>
+      </footer>
+    </main>
     <noscript>
       <main>
         <h1>Snake 3D – Free Online Snake Game</h1>
