@@ -1,11 +1,11 @@
 import './styles.css';
 import { inject } from '@vercel/analytics';
-import { Game } from './game/Game';
 import { LEVELS, type GameMode } from './game/levels';
 import type { SnakeState } from './game/simulation';
 import { getTranslation, localeLabels, mobileTranslations, type Locale } from './i18n';
 
 inject();
+const { Game } = await import('./game/Game');
 
 type Quality = 'low' | 'medium' | 'high';
 type ControlsSize = 'medium' | 'large' | 'xlarge';
@@ -58,6 +58,7 @@ function savePreferences(): void {
 }
 
 function start(mode = selectedMode, level = selectedLevel): void {
+  document.body.classList.add('game-active');
   selectedMode = mode;
   selectedLevel = level;
   lastEnd = null;
@@ -74,6 +75,7 @@ function start(mode = selectedMode, level = selectedLevel): void {
 }
 
 function showMenu(): void {
+  document.body.classList.remove('game-active');
   hud.classList.add('hidden');
   pauseScreen.classList.add('hidden');
   endScreen.classList.add('hidden');
@@ -307,5 +309,13 @@ if (import.meta.env.DEV) {
       hud.classList.remove('hidden');
       gameAds.classList.remove('hidden');
     }
+  }, 120);
+  if (params.has('preview-score')) setTimeout(() => {
+    start('endless', 0);
+    game.state.score = 2_400;
+    game.state.best = 8_400;
+    game.state.eaten = 18;
+    game.state.multiplier = 5;
+    updateHud(game.state);
   }, 120);
 }

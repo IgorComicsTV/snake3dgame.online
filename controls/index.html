@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake Controls – Keyboard, Arrow Keys and Swipe</title>
+    <meta name="description" content="Complete Snake controls for desktop and mobile. Learn arrow keys, WASD, pause shortcuts, swipe gestures and adjustable touch buttons." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://snake3dgame.online/controls/" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Barlow:wght@400;600&amp;display=swap" rel="stylesheet" />
+    <meta property="og:type" content="article" /><meta property="og:title" content="Snake Controls" /><meta property="og:description" content="Keyboard, arrow key, swipe and touch controls for Snake 3D." /><meta property="og:url" content="https://snake3dgame.online/controls/" /><meta property="og:image" content="https://snake3dgame.online/snake-controls.webp" /><meta property="og:site_name" content="Snake 3D" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          { "@type": "WebPage", "@id": "https://snake3dgame.online/controls/#webpage", "url": "https://snake3dgame.online/controls/", "name": "Snake Controls – Keyboard, Arrow Keys and Swipe", "description": "Complete controls for Snake 3D on desktop and mobile.", "isPartOf": { "@id": "https://snake3dgame.online/#website" }, "inLanguage": "en" },
+          { "@type": "BreadcrumbList", "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Snake Game", "item": "https://snake3dgame.online/" },
+            { "@type": "ListItem", "position": 2, "name": "Controls", "item": "https://snake3dgame.online/controls/" }
+          ] }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <header class="content-header"><div><a class="brand" href="/">SNAKE 3D</a><nav class="content-nav" aria-label="Main navigation"><a href="/play/">Play</a><a href="/how-to-play/">How to Play</a><a href="/controls/" aria-current="page">Controls</a><a href="/tips/">Tips</a><a href="/mobile/">Mobile</a><a href="/faq/">FAQ</a><a href="/history/">History</a></nav></div></header>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Snake Game</a> / Controls</nav>
+    <main class="content-main">
+      <h1>Snake Controls</h1>
+      <p class="summary">Use the arrow keys or WASD to control Snake on desktop. On mobile, swipe in the direction you want to move or use the four on-screen arrows. Press Escape or P to pause on a keyboard.</p>
+      <a class="play-cta" href="/play/">Play with these controls</a>
+      <figure class="guide-image"><img src="/snake-controls.webp" width="1185" height="667" alt="Snake 3D desktop controls with arrow keys and WASD" /><figcaption>Desktop supports both arrow keys and WASD, with a short input queue for responsive turns.</figcaption></figure>
+
+      <h2>Desktop controls</h2>
+      <table class="key-table">
+        <thead><tr><th>Action</th><th>Arrow keys</th><th>WASD</th></tr></thead>
+        <tbody>
+          <tr><td>Move up</td><td><kbd>↑</kbd></td><td><kbd>W</kbd></td></tr>
+          <tr><td>Move left</td><td><kbd>←</kbd></td><td><kbd>A</kbd></td></tr>
+          <tr><td>Move down</td><td><kbd>↓</kbd></td><td><kbd>S</kbd></td></tr>
+          <tr><td>Move right</td><td><kbd>→</kbd></td><td><kbd>D</kbd></td></tr>
+          <tr><td>Pause or resume</td><td colspan="2"><kbd>Esc</kbd> or <kbd>P</kbd></td></tr>
+        </tbody>
+      </table>
+      <p>The snake continues moving after the first direction. A movement key changes the direction of a future grid step; it does not move the snake only while held. A direct reversal is ignored. For example, a snake moving right cannot immediately move left because its first body segment occupies that cell.</p>
+
+      <h2>Why quick turns feel responsive</h2>
+      <p>Snake 3D uses a small input queue. If the snake is moving right and you quickly press Up and then Left, both valid turns can be prepared before the next two simulation steps. This removes the sluggish feeling that occurs when a game checks only the most recent key at the exact movement instant.</p>
+      <p>The queue is intentionally limited. It accepts a few deliberate turns without storing a long sequence that would keep controlling the snake after the player changes their mind. Repeating the same direction does not fill the queue.</p>
+
+      <h2>Mobile swipe controls</h2>
+      <p>Touch the open game area, drag clearly in one direction, and release. The game compares horizontal and vertical movement and chooses the stronger axis. A mostly horizontal swipe moves left or right; a mostly vertical swipe moves up or down. Very short movements are ignored to reduce accidental turns.</p>
+      <p>Swiping works on the canvas rather than on menus or buttons. The game gives a short vibration when the device supports vibration and the gesture is recognized. Swipe direction controls the snake; it does not drag the camera or rotate the board.</p>
+
+      <h2>On-screen arrow controls</h2>
+      <p>Four directional buttons appear near the bottom of the screen on touch devices. They use the same input queue as the keyboard and swipe controls, so the rules stay consistent. The up arrow sits above the left, down, and right row to match a familiar directional-pad layout.</p>
+      <p>Open Settings to choose Medium, Large, or Extra Large controls. Large is the default. Choose Extra Large if the buttons are difficult to reach or if accidental taps are common. Choose Medium when screen space is limited and swipe is the primary input method.</p>
+
+      <h2>Pause and menu controls</h2>
+      <p>Press Escape or P during desktop play to pause. Escape also closes the Settings screen when it is open. The pause overlay stops the simulation, hides the mobile direction buttons, and offers Continue, Restart, Settings, and Main menu.</p>
+      <p>On mobile, use the pause button in the top-right corner. Browsers may also pause the game automatically when the page becomes hidden, which prevents the snake from continuing while the player switches tabs or apps.</p>
+
+      <h2>Control troubleshooting</h2>
+      <h3>A turn was ignored</h3>
+      <p>The most common reason is an attempted 180-degree reversal. Turn perpendicular first. A very short swipe may also remain below the gesture threshold.</p>
+      <h3>The keyboard scrolls the page</h3>
+      <p>When the game is active, recognized movement keys prevent their normal browser action. Click the game once if another browser control currently has focus.</p>
+      <h3>Touch buttons are too small</h3>
+      <p>Open Settings, find Control size, and choose Large or Extra Large. The preference is saved locally for the next visit on that device.</p>
+      <h3>The game does not respond at all</h3>
+      <p>Reload the page and confirm that JavaScript is enabled. The production build includes a check that prevents publication when a required interface element is missing.</p>
+
+      <p>Once the controls feel natural, continue with the <a href="/tips/">Snake strategy guide</a>. For phone-specific setup, see <a href="/mobile/">how to play Snake on mobile</a>.</p>
+      <div class="next-guide"><strong>Next guide:</strong> <a href="/tips/">Snake strategy and high-score tips</a></div>
+    </main>
+    <footer class="content-footer"><div><a href="/play/">Play</a><a href="/how-to-play/">How to Play</a><a href="/controls/">Controls</a><a href="/tips/">Tips</a><a href="/mobile/">Mobile</a><a href="/faq/">FAQ</a><a href="/history/">History</a></div></footer>
+    <script type="module" src="/src/content.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+:root {
+  font-family: 'Barlow', sans-serif;
+  color: #e7ead5;
+  background: #111511;
+  font-synthesis: none;
+  --green: #9fbd4f;
+  --cream: #eef1d2;
+  --muted: #b8c0a8;
+  --line: rgba(222, 236, 187, .22);
+  --surface: #192018;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; color: #e7ead5; background: #111511; }
+a { color: #c6df72; text-underline-offset: 4px; }
+img { display: block; max-width: 100%; height: auto; }
+.content-header { border-bottom: 1px solid var(--line); }
+.content-header > div { display: flex; align-items: center; justify-content: space-between; width: min(1080px, calc(100% - 40px)); min-height: 64px; margin: 0 auto; gap: 24px; }
+.brand { color: var(--cream); font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 800; letter-spacing: .04em; text-decoration: none; }
+.content-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px 20px; }
+.content-nav a { color: #b9c2a8; font-size: 14px; text-decoration: none; }
+.content-nav a:hover, .content-nav a[aria-current='page'] { color: var(--cream); text-decoration: underline; }
+.breadcrumb { width: min(760px, calc(100% - 40px)); margin: 28px auto 0; color: #89937a; font-size: 14px; }
+.breadcrumb a { color: #aeb99a; }
+.content-main { width: min(760px, calc(100% - 40px)); margin: 0 auto; padding: 52px 0 72px; }
+.content-main h1, .content-main h2, .content-main h3 { color: var(--cream); font-family: 'Barlow Condensed', sans-serif; line-height: 1.08; }
+.content-main h1 { margin: 0 0 24px; font-size: clamp(50px, 9vw, 78px); letter-spacing: .01em; }
+.content-main h2 { margin: 54px 0 16px; padding-top: 8px; font-size: clamp(32px, 5vw, 44px); }
+.content-main h3 { margin: 30px 0 10px; font-size: 25px; }
+.content-main p, .content-main li { color: var(--muted); font-size: 17px; line-height: 1.75; }
+.content-main p { margin: 0 0 18px; }
+.content-main ul, .content-main ol { margin: 0 0 22px; padding-left: 25px; }
+.summary { color: #dce1ca !important; font-size: 21px !important; line-height: 1.6 !important; }
+.direct-answer { padding: 18px 0 18px 20px; border-left: 3px solid var(--green); color: #dce1ca !important; }
+.play-cta { display: inline-block; margin: 14px 0 16px; padding: 12px 18px; color: #17200f; background: var(--green); border: 1px solid #c6df72; border-radius: 4px; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 800; letter-spacing: .05em; text-decoration: none; }
+.guide-image { margin: 30px 0; border: 1px solid var(--line); background: var(--surface); }
+.guide-image figcaption { padding: 10px 12px; color: #9da88d; font-size: 14px; }
+.key-table { width: 100%; margin: 26px 0; border-collapse: collapse; }
+.key-table th, .key-table td { padding: 13px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.key-table th { color: var(--cream); font-family: 'Barlow Condensed', sans-serif; font-size: 18px; }
+.key-table td { color: var(--muted); line-height: 1.55; }
+kbd { padding: 2px 6px; color: var(--cream); background: #20291f; border: 1px solid #58664c; border-radius: 3px; font-family: inherit; font-size: .9em; }
+.faq-list details { padding: 18px 0; border-top: 1px solid var(--line); }
+.faq-list summary { color: var(--cream); font-size: 18px; font-weight: 600; cursor: pointer; }
+.faq-list details p { margin: 10px 0 0; }
+.next-guide { margin-top: 58px; padding-top: 24px; border-top: 1px solid var(--line); }
+.source-list { color: #9ea88f; font-size: 15px; }
+.content-footer { border-top: 1px solid var(--line); }
+.content-footer > div { display: flex; flex-wrap: wrap; gap: 12px 24px; width: min(1080px, calc(100% - 40px)); margin: 0 auto; padding: 28px 0 40px; }
+.content-footer a { color: #aeb99a; }
+
+@media (max-width: 720px) {
+  .content-header > div { align-items: flex-start; flex-direction: column; padding: 16px 0; }
+  .content-nav { justify-content: flex-start; gap: 10px 16px; }
+  .breadcrumb, .content-main { width: min(100% - 32px, 760px); }
+  .content-main { padding-top: 36px; }
+  .content-main p, .content-main li { font-size: 16px; line-height: 1.68; }
+  .summary { font-size: 19px !important; }
+  .key-table { font-size: 14px; }
+  .key-table th, .key-table td { padding: 10px 8px; }
+}
