@@ -33,6 +33,7 @@ const controlsSizeSelect = get<HTMLSelectElement>('controls-size-select');
 const devParams = new URLSearchParams(location.search);
 const forceTouchPreview = import.meta.env.DEV && devParams.has('touch');
 const isTouch = forceTouchPreview || matchMedia('(pointer: coarse)').matches;
+const socialBarSelector = "iframe[id^='container-a764163f73af04eaedaa7cb2049c28ee'], iframe[class^='container-a764163f73af04eaedaa7cb2049c28ee']";
 document.documentElement.classList.toggle('force-touch-preview', forceTouchPreview);
 let selectedMode: GameMode = 'endless';
 let selectedLevel = 0;
@@ -40,6 +41,17 @@ let eventTimer = 0;
 let lastEnd: { won: boolean; state: SnakeState } | null = null;
 let settingsReturn: 'menu' | 'pause' = 'menu';
 let preferences = loadPreferences();
+
+function setSocialBarVisible(visible: boolean): void {
+  document.querySelectorAll<HTMLElement>(socialBarSelector).forEach((element) => {
+    if (visible) element.style.removeProperty('display');
+    else element.style.setProperty('display', 'none', 'important');
+  });
+}
+
+new MutationObserver(() => {
+  if (document.body.classList.contains('game-active')) setSocialBarVisible(false);
+}).observe(document.body, { childList: true, subtree: true });
 
 function loadPreferences(): Preferences {
   try {
@@ -59,6 +71,7 @@ function savePreferences(): void {
 
 function start(mode = selectedMode, level = selectedLevel): void {
   document.body.classList.add('game-active');
+  setSocialBarVisible(false);
   selectedMode = mode;
   selectedLevel = level;
   lastEnd = null;
@@ -76,6 +89,7 @@ function start(mode = selectedMode, level = selectedLevel): void {
 
 function showMenu(): void {
   document.body.classList.remove('game-active');
+  setSocialBarVisible(true);
   hud.classList.add('hidden');
   pauseScreen.classList.add('hidden');
   endScreen.classList.add('hidden');

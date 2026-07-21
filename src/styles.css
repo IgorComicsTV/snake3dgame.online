@@ -15,6 +15,8 @@
 html { width: 100%; min-height: 100%; margin: 0; scroll-behavior: smooth; }
 body { width: 100%; min-height: 100%; margin: 0; overflow-x: hidden; touch-action: pan-y; }
 body.game-active { height: 100%; overflow: hidden; }
+body.game-active iframe[id^='container-a764163f73af04eaedaa7cb2049c28ee'],
+body.game-active iframe[class^='container-a764163f73af04eaedaa7cb2049c28ee'] { display: none !important; }
 #app { position: relative; width: 100%; height: 100svh; min-height: 520px; overflow: hidden; touch-action: none; user-select: none; }
 button { font: inherit; cursor: pointer; }
 #game-canvas { display: block; width: 100%; height: 100%; outline: none; background: #111511 url('/snake-game-board.webp') center / cover no-repeat; }
@@ -97,13 +99,15 @@ h2 { font-size: clamp(48px, 7vw, 82px); }
 .mobile-only-setting { display: none; }
 .swipe-hint { margin: -8px 0 20px !important; color: #aeb99a !important; font-size: 13px !important; }
 
-.ad-slot { align-items: center; justify-content: center; color: rgba(226, 234, 206, .42); background: rgba(24, 32, 23, .34); border: 1px dashed rgba(226, 234, 206, .14); font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: .12em; pointer-events: auto; }
-.ad-top, .ad-left, .ad-right, .ad-menu-bottom { display: none; position: absolute; z-index: 4; }
-.ad-top { top: 8px; left: 50%; width: 728px; height: 90px; transform: translateX(-50%); }
-.ad-left, .ad-right { top: 145px; width: 160px; height: 600px; }
+.ad-slot { align-items: center; justify-content: center; overflow: hidden; pointer-events: auto; }
+.ad-left, .ad-right, .ad-menu-bottom, .ad-menu-mobile { display: none; position: absolute; z-index: 4; }
+.ad-left, .ad-right { top: 110px; width: 160px; }
+.ad-left { height: 600px; }
+.ad-right { height: 300px; }
 .ad-left { left: 8px; }
 .ad-right { right: 8px; }
 .ad-menu-bottom { left: 50%; bottom: 8px; width: 728px; height: 90px; transform: translateX(-50%); }
+.ad-menu-mobile { left: 50%; bottom: max(8px, env(safe-area-inset-bottom)); width: 320px; height: 50px; transform: translateX(-50%); }
 
 .mobile-controls { --control-size: 70px; position: absolute; left: 50%; bottom: max(18px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(3, var(--control-size)); grid-template-rows: repeat(2, var(--control-size)); gap: 7px; transform: translateX(-50%); z-index: 7; }
 .mobile-controls[data-size='medium'] { --control-size: 58px; }
@@ -136,6 +140,10 @@ h2 { font-size: clamp(48px, 7vw, 82px); }
 .game-info details p { margin: 10px 0 0; font-size: 16px; }
 .site-footer { display: flex; flex-wrap: wrap; gap: 12px 24px; padding: 32px 0 0; }
 .site-footer a { color: #aeb99a; }
+.content-ad { display: flex; justify-content: center; margin: 32px auto; overflow: hidden; }
+.content-ad-wide { width: min(468px, 100%); min-height: 60px; }
+.content-ad-box { width: 300px; min-height: 250px; }
+.native-ad { min-height: 120px; padding: 40px 0; border-bottom: 1px solid var(--line); overflow: hidden; }
 
 @media (max-width: 680px) {
   .screen { padding: 20px; }
@@ -164,6 +172,8 @@ h2 { font-size: clamp(48px, 7vw, 82px); }
   .game-info p { font-size: 16px; line-height: 1.68; }
   .game-info-intro .direct-answer { font-size: 18px; }
   .info-columns { grid-template-columns: 1fr; gap: 24px; }
+  .ad-menu-mobile { display: flex; }
+  .content-ad-wide { display: none; }
 }
 
 @media (pointer: coarse) {
@@ -172,8 +182,12 @@ h2 { font-size: clamp(48px, 7vw, 82px); }
 
 .force-touch-preview .mobile-only-setting { display: block; }
 
-@media (min-width: 1180px) and (min-height: 720px) {
-  .ad-top, .ad-left, .ad-right, .ad-menu-bottom { display: flex; }
+@media (min-width: 860px) and (min-height: 760px) {
+  .ad-menu-bottom { display: flex; }
+}
+
+@media (min-width: 1400px) and (min-height: 720px) {
+  .ad-left, .ad-right { display: flex; }
   .hud .stage-label { top: 106px; }
   .hud .goal { top: 136px; }
 }
