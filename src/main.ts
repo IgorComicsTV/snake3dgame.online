@@ -2,10 +2,11 @@ import './styles.css';
 import { Game } from './game/Game';
 import { LEVELS, type GameMode } from './game/levels';
 import type { SnakeState } from './game/simulation';
-import { getTranslation, localeLabels, type Locale } from './i18n';
+import { getTranslation, localeLabels, mobileTranslations, type Locale } from './i18n';
 
 type Quality = 'low' | 'medium' | 'high';
-interface Preferences { locale: Locale; quality: Quality; sound: boolean; }
+type ControlsSize = 'medium' | 'large' | 'xlarge';
+interface Preferences { locale: Locale; quality: Quality; sound: boolean; controlsSize: ControlsSize; }
 
 const get = <T extends HTMLElement>(id: string): T => document.getElementById(id) as T;
 const game = new Game(get<HTMLCanvasElement>('game-canvas'));
@@ -25,7 +26,11 @@ const shareButton = get<HTMLButtonElement>('share-button');
 const languageSelect = get<HTMLSelectElement>('language-select');
 const qualitySelect = get<HTMLSelectElement>('quality-select');
 const soundSelect = get<HTMLSelectElement>('sound-select');
-const isTouch = matchMedia('(pointer: coarse)').matches;
+const controlsSizeSelect = get<HTMLSelectElement>('controls-size-select');
+const devParams = new URLSearchParams(location.search);
+const forceTouchPreview = import.meta.env.DEV && devParams.has('touch');
+const isTouch = forceTouchPreview || matchMedia('(pointer: coarse)').matches;
+document.documentElement.classList.toggle('force-touch-preview', forceTouchPreview);
 let selectedMode: GameMode = 'endless';
 let selectedLevel = 0;
 let eventTimer = 0;
@@ -40,8 +45,9 @@ function loadPreferences(): Preferences {
       locale: 'en',
       quality: ['low', 'medium', 'high'].includes(saved.quality ?? '') ? saved.quality as Quality : 'high',
       sound: saved.sound ?? true,
+      controlsSize: ['medium', 'large', 'xlarge'].includes(saved.controlsSize ?? '') ? saved.controlsSize as ControlsSize : 'large',
     };
-  } catch { return { locale: 'en', quality: 'high', sound: true }; }
+  } catch { return { locale: 'en', quality: 'high', sound: true, controlsSize: 'large' }; }
 }
 
 function savePreferences(): void {
@@ -118,6 +124,7 @@ function renderLevelGrid(): void {
 
 function applyTranslations(): void {
   const t = getTranslation(preferences.locale);
+  const mobile = mobileTranslations[preferences.locale];
   document.documentElement.lang = preferences.locale;
   get('tagline').textContent = t.tagline;
   get('endless-button').textContent = t.endless;
@@ -151,6 +158,11 @@ function applyTranslations(): void {
   qualitySelect.options[2].text = t.high;
   soundSelect.options[0].text = t.enabled;
   soundSelect.options[1].text = t.disabled;
+  get('controls-size-label').textContent = mobile.controlsSize;
+  controlsSizeSelect.options[0].text = mobile.medium;
+  controlsSizeSelect.options[1].text = mobile.large;
+  controlsSizeSelect.options[2].text = mobile.xlarge;
+  get('swipe-hint').textContent = mobile.swipeHint;
   renderLevelGrid();
   updateHud(game.state);
   if (lastEnd) renderEnd(lastEnd.won, lastEnd.state);
@@ -196,6 +208,8 @@ Object.entries(localeLabels).forEach(([value, label]) => languageSelect.add(new 
 languageSelect.value = preferences.locale;
 qualitySelect.value = preferences.quality;
 soundSelect.value = preferences.sound ? 'on' : 'off';
+controlsSizeSelect.value = preferences.controlsSize;
+mobileControls.dataset.size = preferences.controlsSize;
 game.setQuality(preferences.quality);
 game.setSound(preferences.sound);
 applyTranslations();
@@ -213,6 +227,11 @@ qualitySelect.addEventListener('change', () => {
 soundSelect.addEventListener('change', () => {
   preferences.sound = soundSelect.value === 'on';
   game.setSound(preferences.sound);
+  savePreferences();
+});
+controlsSizeSelect.addEventListener('change', () => {
+  preferences.controlsSize = controlsSizeSelect.value as ControlsSize;
+  mobileControls.dataset.size = preferences.controlsSize;
   savePreferences();
 });
 
@@ -265,7 +284,7 @@ document.addEventListener('visibilitychange', () => {
 });
 
 if (import.meta.env.DEV) {
-  const params = new URLSearchParams(location.search);
+  const params = devParams;
   const preview = params.get('play');
   if (preview) setTimeout(() => preview === 'endless' ? start('endless', 0) : start('levels', Math.max(0, Number(preview) - 1)), 120);
   if (params.has('settings')) setTimeout(() => showSettings('menu'), 120);
