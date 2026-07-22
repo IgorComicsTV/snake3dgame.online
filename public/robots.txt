@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://snake3dgame.online/sitemap.xml
+Sitemap: https://snakegame3d.online/sitemap.xml

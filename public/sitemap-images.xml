@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://snake3dgame.online/how-to-play/</loc>
-    <image:image><image:loc>https://snake3dgame.online/snake-game-board.webp</image:loc><image:title>Snake 3D game board</image:title><image:caption>A Snake 3D board with fruit, walls and portals.</image:caption></image:image>
+    <loc>https://snakegame3d.online/how-to-play/</loc>
+    <image:image><image:loc>https://snakegame3d.online/snake-game-board.webp</image:loc><image:title>Snake 3D game board</image:title><image:caption>A Snake 3D board with fruit, walls and portals.</image:caption></image:image>
   </url>
   <url>
-    <loc>https://snake3dgame.online/controls/</loc>
-    <image:image><image:loc>https://snake3dgame.online/snake-controls.webp</image:loc><image:title>Snake keyboard controls</image:title><image:caption>Snake 3D desktop controls with arrow keys and WASD.</image:caption></image:image>
+    <loc>https://snakegame3d.online/controls/</loc>
+    <image:image><image:loc>https://snakegame3d.online/snake-controls.webp</image:loc><image:title>Snake keyboard controls</image:title><image:caption>Snake 3D desktop controls with arrow keys and WASD.</image:caption></image:image>
   </url>
   <url>
-    <loc>https://snake3dgame.online/mobile/</loc>
-    <image:image><image:loc>https://snake3dgame.online/snake-mobile.webp</image:loc><image:title>Snake mobile controls</image:title><image:caption>Snake 3D on mobile with large touch arrows and swipe support.</image:caption></image:image>
+    <loc>https://snakegame3d.online/mobile/</loc>
+    <image:image><image:loc>https://snakegame3d.online/snake-mobile.webp</image:loc><image:title>Snake mobile controls</image:title><image:caption>Snake 3D on mobile with large touch arrows and swipe support.</image:caption></image:image>
   </url>
   <url>
-    <loc>https://snake3dgame.online/tips/</loc>
-    <image:image><image:loc>https://snake3dgame.online/snake-score.webp</image:loc><image:title>Snake score and combo</image:title><image:caption>Snake 3D score, best score and combo multiplier during play.</image:caption></image:image>
+    <loc>https://snakegame3d.online/tips/</loc>
+    <image:image><image:loc>https://snakegame3d.online/snake-score.webp</image:loc><image:title>Snake score and combo</image:title><image:caption>Snake 3D score, best score and combo multiplier during play.</image:caption></image:image>
   </url>
 </urlset>
