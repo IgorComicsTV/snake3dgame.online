@@ -33,6 +33,7 @@ const controlsSizeSelect = get<HTMLSelectElement>('controls-size-select');
 const devParams = new URLSearchParams(location.search);
 const forceTouchPreview = import.meta.env.DEV && devParams.has('touch');
 const isTouch = forceTouchPreview || matchMedia('(pointer: coarse)').matches;
+const gameUrl = 'https://www.snakegame3d.online/';
 const socialBarSelector = "iframe[id^='container-a764163f73af04eaedaa7cb2049c28ee'], iframe[class^='container-a764163f73af04eaedaa7cb2049c28ee']";
 document.documentElement.classList.toggle('force-touch-preview', forceTouchPreview);
 let selectedMode: GameMode = 'endless';
@@ -269,7 +270,8 @@ get('settings-close-button').addEventListener('click', closeSettings);
 shareButton.addEventListener('click', () => {
   if (!lastEnd || lastEnd.state.mode !== 'endless' || lastEnd.state.secondLifeUsed) return;
   const text = getTranslation(preferences.locale).shareText.replace('{score}', lastEnd.state.score.toLocaleString(preferences.locale));
-  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`${text} #Snake3D`)}`, '_blank', 'noopener,noreferrer,width=720,height=520');
+  const params = new URLSearchParams({ text: `${text} #Snake3D`, url: gameUrl });
+  window.open(`https://twitter.com/intent/tweet?${params}`, '_blank', 'noopener,noreferrer,width=720,height=520');
   beginSecondLifeCountdown();
 });
 
